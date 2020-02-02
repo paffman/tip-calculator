@@ -1,30 +1,32 @@
 package org.edx.tipcalculator;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.etBillAmount)
-    EditText billAmount;
+    EditText etBillAmount;
     @BindView(R.id.tvTipPercent)
     TextView tvTipPercent;
     @BindView(R.id.tvTipTotal)
     TextView tvTipTotal;
-    @BindView(R.id.tvBillTotal)
+    @BindView(R.id.tvBillTotalAmount)
     TextView tvBillTotal;
 
     float percentage = 0;
-    float totalAmount = 0;
+    float tipTotal = 0;
     float finalBillAmount = 0;
+    float totalBillAmount = 0;
 
     float REGULAR_TIP_PERCENTAGE = 10;
     float DEFAULT_TIP_PERCENTAGE = 15;
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setTipValues() {
         tvTipPercent.setText(getString(R.string.main_msg_tippercent, percentage));
-        tvTipTotal.setText(getString(R.string.main_msg_tiptotal, totalAmount));
+        tvTipTotal.setText(getString(R.string.main_msg_tiptotal, tipTotal));
         tvBillTotal.setText(getString(R.string.main_msg_billtotalresult, finalBillAmount));
 
     }
@@ -63,5 +65,29 @@ public class MainActivity extends AppCompatActivity {
                 percentage = EXCELLENT_TIP_PERCENTAGE;
                 break;
         }
+
+        calculateFinalBill();
+        setTipValues();
+    }
+
+    @OnTextChanged(R.id.etBillAmount)
+    public void onTextChanged() {
+        calculateFinalBill();
+        setTipValues();
+    }
+
+    private void calculateFinalBill() {
+        if(percentage == 0){
+            percentage = DEFAULT_TIP_PERCENTAGE;
+        }
+
+        if(!etBillAmount.getText().toString().equals("") && !etBillAmount.getText().toString().equals(".")) {
+            totalBillAmount = Float.valueOf(etBillAmount.getText().toString());
+        } else {
+            totalBillAmount = 0;
+        }
+
+        tipTotal = (totalBillAmount*percentage)/100;
+        finalBillAmount = totalBillAmount + tipTotal;
     }
 }
