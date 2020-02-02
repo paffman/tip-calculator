@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="64dp"
+    android:paddingRight="64dp"
+    android:paddingTop="16dp"
+    android:background="@color/colorBlue"
+    tools:context="org.edx.tipcalculator.MainActivity">
+
+    <TextView
+        android:id="@+id/tvBillAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/main.msg.billamount"
+        android:textColor="@color/colorWhite"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
+
+    <!-- layout_below gibt an wo es angeordnet werden soll bei relative -->
+    <EditText
+        android:id="@+id/etBillAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvBillAmount"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:hint="@string/main.hint.billamount"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorLightGray"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:gravity="center"
+        />
+
+    <!-- Trennlinie -->
+    <View
+        android:id="@+id/vRatingButtons"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/etBillAmount"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@color/colorLightGray"
+        />
+
+    <!-- Linear Layout for the smilies-->
+    <LinearLayout
+        android:id="@+id/rlRatingButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/vRatingButtons"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
+        
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="@dimen/activity_image_buttons"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="@dimen/activity_image_buttons"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="@dimen/activity_image_buttons"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
